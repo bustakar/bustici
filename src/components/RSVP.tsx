@@ -36,7 +36,6 @@ export default function RSVP() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    // Simulate submission (no backend yet)
     setTimeout(() => {
       setLoading(false)
       setSubmitted(true)
@@ -44,24 +43,46 @@ export default function RSVP() {
   }
 
   const inputClass =
-    'w-full font-body text-wedding-brown bg-white/70 border border-wedding-peach/50 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-wedding-copper/30 focus:border-wedding-copper placeholder:text-wedding-lightbrown/50 transition-all'
+    'w-full font-body text-wedding-brown bg-white/75 border border-wedding-peach/40 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-wedding-copper/25 focus:border-wedding-copper/60 placeholder:text-wedding-lightbrown/40 transition-all'
 
-  const labelClass = 'block font-sans text-xs uppercase tracking-widest text-wedding-lightbrown mb-1.5'
+  const labelClass = 'block font-sans text-[10px] tracking-[0.35em] text-wedding-lightbrown/80 mb-2 uppercase'
 
   if (submitted) {
     return (
-      <section id="rsvp" className="py-24 md:py-32 bg-wedding-ivory">
+      <section id="rsvp" className="py-24 md:py-36 bg-wedding-ivory">
         <div className="max-w-xl mx-auto px-6 text-center">
-          <div className="text-6xl mb-6">🌸</div>
-          <h2 className="font-serif text-4xl text-wedding-brown mb-4">Děkujeme!</h2>
-          <p className="font-body text-wedding-lightbrown leading-relaxed">
+          {/* Floral ornament */}
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <div className="flex-1 h-px bg-wedding-copper/20 max-w-[80px] ml-auto" />
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+              <circle cx="18" cy="18" r="10" stroke="#B87333" strokeWidth="1" strokeOpacity="0.4" fill="none" />
+              <circle cx="18" cy="18" r="5" fill="#FFCBA4" fillOpacity="0.5" />
+              <circle cx="18" cy="18" r="2.5" fill="#E8A838" fillOpacity="0.5" />
+              {[0, 60, 120, 180, 240, 300].map(deg => (
+                <ellipse
+                  key={deg}
+                  cx={18 + 10 * Math.cos((deg * Math.PI) / 180)}
+                  cy={18 + 10 * Math.sin((deg * Math.PI) / 180)}
+                  rx="2.5"
+                  ry="5"
+                  fill="#F4C2C2"
+                  fillOpacity="0.5"
+                  transform={`rotate(${deg} ${18 + 10 * Math.cos((deg * Math.PI) / 180)} ${18 + 10 * Math.sin((deg * Math.PI) / 180)})`}
+                />
+              ))}
+            </svg>
+            <div className="flex-1 h-px bg-wedding-copper/20 max-w-[80px]" />
+          </div>
+
+          <h2 className="font-serif text-4xl text-wedding-brown mb-5 font-light">Děkujeme!</h2>
+          <p className="font-body text-wedding-lightbrown leading-relaxed" style={{ fontSize: '1.05rem' }}>
             {form.attending === 'yes'
               ? `Moc se na vás těšíme, ${form.name}! Vaše účast nás moc těší. Uvidíme se 12. června na Statku Jedraž.`
               : `Díky za zprávu, ${form.name}. Je nám líto, že nemůžete přijít, ale chápeme. Budete v našich myšlenkách.`}
           </p>
           <button
             onClick={() => { setSubmitted(false); setForm(initial) }}
-            className="mt-8 font-sans text-sm uppercase tracking-widest text-wedding-copper border border-wedding-copper/40 px-6 py-2.5 rounded-full hover:bg-wedding-copper hover:text-wedding-cream transition-colors"
+            className="mt-8 btn-outline"
           >
             Odeslat znovu
           </button>
@@ -71,18 +92,16 @@ export default function RSVP() {
   }
 
   return (
-    <section id="rsvp" className="py-24 md:py-32 bg-wedding-ivory">
+    <section id="rsvp" className="py-24 md:py-36 bg-wedding-ivory">
       <div className="max-w-2xl mx-auto px-6">
         {/* Heading */}
         <div ref={headingRef} className="fade-section text-center mb-14">
-          <p className="font-sans text-xs uppercase tracking-[0.35em] text-wedding-copper mb-4">
-            Odpovězte do 30. dubna 2026
-          </p>
-          <h2 className="section-title mb-4">Potvrdit účast</h2>
+          <p className="section-label">Odpovězte do 30. dubna 2026</p>
+          <h2 className="section-title mb-4 font-light">Potvrdit účast</h2>
           <div className="ornament">
-            <span className="font-serif italic text-wedding-copper text-lg">♦</span>
+            <span className="font-serif italic text-wedding-copper/60 text-lg">✦</span>
           </div>
-          <p className="font-body text-wedding-lightbrown max-w-sm mx-auto">
+          <p className="font-body text-wedding-lightbrown max-w-sm mx-auto" style={{ fontSize: '1.025rem' }}>
             Pomozte nám s organizací — prosíme o potvrzení do 30. dubna 2026.
           </p>
         </div>
@@ -91,7 +110,8 @@ export default function RSVP() {
         <div ref={formRef} className="fade-section">
           <form
             onSubmit={handleSubmit}
-            className="bg-white/50 backdrop-blur-sm rounded-3xl p-8 md:p-10 border border-wedding-peach/30 space-y-6"
+            className="rounded-3xl p-8 md:p-10 border border-wedding-peach/25 space-y-7"
+            style={{ background: 'rgba(255,248,240,0.6)', backdropFilter: 'blur(8px)' }}
           >
             {/* Name */}
             <div>
@@ -126,10 +146,10 @@ export default function RSVP() {
                 {(['yes', 'no'] as const).map(val => (
                   <label
                     key={val}
-                    className={`flex items-center justify-center gap-2 py-3 px-4 rounded-xl border cursor-pointer transition-all font-body text-sm ${
+                    className={`flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl border cursor-pointer transition-all font-body ${
                       form.attending === val
-                        ? 'bg-wedding-copper text-wedding-cream border-wedding-copper'
-                        : 'bg-white/70 text-wedding-lightbrown border-wedding-peach/50 hover:border-wedding-copper/40'
+                        ? 'bg-wedding-copper text-wedding-cream border-wedding-copper shadow-copper'
+                        : 'bg-white/70 text-wedding-lightbrown border-wedding-peach/40 hover:border-wedding-copper/35'
                     }`}
                   >
                     <input
@@ -140,23 +160,23 @@ export default function RSVP() {
                       onChange={set('attending')}
                       className="sr-only"
                     />
-                    {val === 'yes' ? '🎉 Ano, přijdu!' : '😢 Bohužel nemohu'}
+                    <span style={{ fontSize: '1rem' }}>
+                      {val === 'yes' ? 'Ano, s radostí přijdu' : 'Bohužel se nemohu zúčastnit'}
+                    </span>
                   </label>
                 ))}
               </div>
             </div>
 
-            {/* Number of guests (only if attending) */}
+            {/* Guests */}
             {form.attending === 'yes' && (
               <div>
                 <label className={labelClass}>Počet osob (včetně vás) *</label>
-                <select
-                  value={form.guests}
-                  onChange={set('guests')}
-                  className={inputClass}
-                >
+                <select value={form.guests} onChange={set('guests')} className={inputClass}>
                   {[1, 2, 3, 4].map(n => (
-                    <option key={n} value={n}>{n} {n === 1 ? 'osoba' : n < 5 ? 'osoby' : 'osob'}</option>
+                    <option key={n} value={n}>
+                      {n} {n === 1 ? 'osoba' : n < 5 ? 'osoby' : 'osob'}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -188,15 +208,18 @@ export default function RSVP() {
               />
             </div>
 
+            {/* Divider */}
+            <div className="h-px bg-wedding-peach/30" />
+
             {/* Submit */}
             <button
               type="submit"
               disabled={!form.name || !form.email || !form.attending || loading}
-              className="w-full font-sans text-sm uppercase tracking-widest bg-wedding-copper text-wedding-cream py-4 rounded-xl hover:bg-wedding-brown transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full font-sans text-[11px] tracking-[0.3em] uppercase bg-wedding-copper text-wedding-cream py-4 rounded-xl hover:bg-wedding-brown transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-3"
             >
               {loading ? (
                 <>
-                  <span className="w-4 h-4 border-2 border-wedding-cream/40 border-t-wedding-cream rounded-full animate-spin" />
+                  <span className="w-4 h-4 border-2 border-wedding-cream/30 border-t-wedding-cream rounded-full animate-spin" />
                   Odesílám…
                 </>
               ) : (
