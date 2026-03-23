@@ -22,45 +22,107 @@
   }
 }
 
+/* Paper grain overlay — creates warm, textured film grain atmosphere */
+body::before {
+  content: '';
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
 @layer components {
   .section-title {
-    @apply font-serif text-4xl md:text-5xl text-wedding-brown text-center;
+    @apply font-serif text-4xl md:text-5xl text-wedding-brown text-center font-light tracking-wide;
   }
 
+  /* Elegant ornamental divider — lines + diamond */
   .ornament {
-    @apply flex items-center justify-center gap-4 my-4;
+    @apply flex items-center justify-center gap-4 my-5;
   }
 
   .ornament::before,
   .ornament::after {
     content: '';
-    @apply flex-1 h-px bg-wedding-copper opacity-30;
+    @apply flex-1 h-px bg-wedding-copper opacity-20;
   }
 
+  /* Section label — uppercase Cinzel style */
+  .section-label {
+    @apply font-sans text-xs tracking-[0.4em] text-wedding-copper mb-4 uppercase;
+  }
+
+  /* Fade-in animation state */
   .fade-section {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transform: translateY(28px);
+    transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   .fade-section.visible {
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* Card with warm shadow and inset border */
+  .warm-card {
+    @apply bg-white/55 backdrop-blur-sm rounded-2xl border border-wedding-peach/25
+           shadow-warm hover:shadow-warm-lg hover:-translate-y-0.5
+           transition-all duration-300;
+  }
+
+  /* Parchment card — slightly more saturated background */
+  .parchment-card {
+    @apply rounded-2xl border border-wedding-peach/30
+           transition-all duration-300;
+    background: linear-gradient(145deg, rgba(255,248,240,0.7) 0%, rgba(250,240,230,0.5) 100%);
+  }
+
+  /* Button — primary copper */
+  .btn-primary {
+    @apply font-sans text-xs tracking-[0.25em] uppercase bg-wedding-copper text-wedding-cream
+           px-8 py-3 rounded-full hover:bg-wedding-brown
+           transition-all duration-300 hover:shadow-copper;
+  }
+
+  /* Button — outlined */
+  .btn-outline {
+    @apply font-sans text-xs tracking-[0.25em] uppercase border border-wedding-copper
+           text-wedding-copper px-8 py-3 rounded-full
+           hover:bg-wedding-copper hover:text-wedding-cream transition-all duration-300;
+  }
+
+  /* Subtle section separator using botanical SVG */
+  .section-sep {
+    @apply text-center text-wedding-copper/30 text-lg select-none my-2;
+  }
 }
 
-/* Decorative SVG leaf / floral accent */
-.floral-divider {
-  text-align: center;
-  color: #B87333;
-  opacity: 0.5;
-  line-height: 1;
-  user-select: none;
+/* Elegant parchment texture for specific sections */
+.parchment-bg {
+  background-image:
+    radial-gradient(ellipse at 20% 80%, rgba(251,206,177,0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(244,194,194,0.12) 0%, transparent 50%),
+    linear-gradient(160deg, #FFF8F0 0%, #FAF0E6 60%, #F5ECD7 100%);
+}
+
+/* Dark romantic section */
+.dark-romantic {
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(184,115,51,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 50%, rgba(232,168,56,0.05) 0%, transparent 60%),
+    #4A3728;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 ::-webkit-scrollbar-track {
   background: #FFF8F0;
@@ -71,4 +133,27 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #B87333;
+}
+
+/* Lace border — subtle top border treatment for section headings */
+.lace-border {
+  position: relative;
+}
+
+.lace-border::after {
+  content: '— ✦ —';
+  display: block;
+  text-align: center;
+  color: #B87333;
+  opacity: 0.35;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 1rem;
+  letter-spacing: 0.5em;
+  margin-top: 1rem;
+}
+
+/* Vignette overlay on hero */
+.hero-vignette {
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(74,55,40,0.08) 100%);
 }
