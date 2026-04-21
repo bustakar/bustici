@@ -20,9 +20,9 @@ export default function Map() {
   useFadeIn(headingRef)
   useFadeIn(cardRef, 200)
 
-  const address = 'Jedraž 1, 264 01 Sedlčany'
-  const mapsUrl = 'https://maps.google.com/?q=Statek+Jedraz+Sedlcany'
-  const embedUrl = `https://www.google.com/maps?q=${encodeURIComponent('Jedraž 1, Sedlčany')}&output=embed`
+  const address = 'Jedraž 1, Radošovice-Volyně, 387 01, Česko'
+  const mapsUrl = 'https://maps.google.com/?q=Jedraž+1+Radošovice+Volyně+387+01'
+  const embedUrl = `https://www.google.com/maps?q=${encodeURIComponent('Jedraž 1, Radošovice, Volyně, 387 01')}&output=embed`
 
   return (
     <section id="mapa" className="py-24 md:py-32 canvas-ivory relative">
@@ -32,7 +32,7 @@ export default function Map() {
           <h2 className="section-title font-light">Statek Jedraž</h2>
           <LaceDivider className="mt-4" />
           <p className="font-body text-wedding-lightbrown max-w-md mx-auto mt-4" style={{ fontSize: '1.05rem' }}>
-            Romantické venkovské sídlo v srdci Posázaví — přibližně hodinu jízdy od Prahy.
+            Romantické venkovské sídlo.
           </p>
         </div>
 
@@ -58,8 +58,12 @@ export default function Map() {
 
             <div className="space-y-3 font-body text-wedding-lightbrown text-[0.95rem]">
               <p>
-                <span className="font-sans text-[10px] tracking-[0.3em] text-wedding-copper uppercase block mb-1">Z Prahy</span>
-                cca 1 hodina autem (přes D1 / Benešov)
+                <span className="font-sans text-[10px] tracking-[0.3em] text-wedding-copper uppercase block mb-1">Z Písku</span>
+                cca 30 minut autem
+              </p>
+              <p>
+                <span className="font-sans text-[10px] tracking-[0.3em] text-wedding-copper uppercase block mb-1">Ze Staňkova</span>
+                cca 1 hodina 30 minut autem
               </p>
               <p>
                 <span className="font-sans text-[10px] tracking-[0.3em] text-wedding-copper uppercase block mb-1">Parkování</span>

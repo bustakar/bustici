@@ -5,39 +5,23 @@ import { LaceDivider } from './Ornaments'
 const faqs = [
   {
     q: 'Kdy mám přijet?',
-    a: 'Obřad začíná ve 14:00, ale doporučujeme dorazit alespoň 30 minut předem — abyste si dali welcome drink, popovídali a v klidu se posadili.',
-  },
-  {
-    q: 'Můžu na statku přespat?',
-    a: 'Ano. Statek Jedraž má omezený počet pokojů přímo v areálu — pokud máte zájem, dejte nám vědět co nejdřív v dotazníku níže a my vám rezervujeme pokoj. Cena cca 1 200 Kč / osoba / noc. V okolí je také několik penzionů a Airbnb (Sedlčany, Krásná Hora, Sedlec-Prčice).',
+    a: 'Obřad začíná ve 12:30. Přijet můžete od 11:00 — dáte si welcome drink, popovídáte a v klidu se posadíte.',
   },
   {
     q: 'Jsou vítány děti?',
-    a: 'S láskou vás zveme bez dětí — máme rádi vaše ratolesti, ale chceme, aby si vy i my mohli den užít naplno. Pokud potřebujete pomoct s hlídáním, rádi vám doporučíme možnosti v okolí.',
+    a: 'S láskou vás zveme bez dětí — máme rádi vaše ratolesti, ale chceme, aby si vy i my mohli den užít naplno.',
   },
   {
     q: 'Jak je to s parkováním?',
-    a: 'Přímo v areálu statku je parkoviště zdarma. Upozorňujeme: alkohol a auto nejdou dohromady. Doporučujeme buď přespat, nebo si zajistit odvoz / řidiče.',
+    a: 'Přímo v areálu statku je parkoviště zdarma.',
   },
   {
     q: 'Kde se obřad odehrává — venku, nebo uvnitř?',
-    a: 'Plánujeme obřad pod hruškou na zahradě. Pokud bude pršet, přesouváme se do historického sálu statku. Plán B je stejně krásný, slibujeme.',
+    a: 'Plánujeme obřad venku na hrázi mezi rybníky. Pokud bude pršet, přesuneme se do stodoly. Plán B je stejně krásný, slibujeme.',
   },
   {
     q: 'Co když mám alergii nebo jsem vegan?',
     a: 'Veganská varianta je k dispozici u všech chodů a alergie zvládneme. Stačí to napsat v dotazníku níže — necháme to vědět catering.',
-  },
-  {
-    q: 'Jaký je dress code?',
-    a: 'Garden formal v naší barevné paletě (viz sekce Dress code výše). Vyhněte se prosím bílé a krémové — ty si necháme pro nevěstu.',
-  },
-  {
-    q: 'Do kdy mám potvrdit účast?',
-    a: 'Prosíme do 30. dubna 2026 — díky tomu doladíme catering, usazení a počet pokojů.',
-  },
-  {
-    q: 'Koho můžu kontaktovat?',
-    a: 'Pokud něco nevíte, napište nám e-mail na wedding@bustici.cz nebo zavolejte. Rádi pomůžeme.',
   },
 ]
 

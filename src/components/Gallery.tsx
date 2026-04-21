@@ -82,7 +82,7 @@ export default function Gallery() {
           <h2 className="section-title font-light">Galerie</h2>
           <LaceDivider className="mt-4" />
           <p className="font-body text-wedding-lightbrown max-w-md mx-auto mt-4" style={{ fontSize: '1.05rem' }}>
-            Po svatbě zde najdete fotky z toho krásného dne. Zatím pár momentů z naší cesty.
+            Naše společné chvíle — dobrodružství, místa, večery, cesty.
           </p>
         </div>
 
@@ -92,12 +92,6 @@ export default function Gallery() {
               <PhotoCard item={item} index={i} />
             </div>
           ))}
-        </div>
-
-        <div className="text-center mt-12">
-          <p className="font-body italic text-wedding-lightbrown/55" style={{ fontSize: '0.925rem' }}>
-            Profesionální fotografie přidáme po 12. června 2026.
-          </p>
         </div>
       </div>
     </section>

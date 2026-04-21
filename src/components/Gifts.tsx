@@ -39,28 +39,40 @@ export default function Gifts() {
         </div>
 
         <div ref={cardRef} className="fade-section">
-          <div className="border border-wedding-copper/30 bg-wedding-cream/85 p-10 text-center">
-            <div className="flex justify-center mb-6">
-              <EnvelopeIcon />
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-stretch">
+            {/* Obálka */}
+            <div className="border border-wedding-copper/30 bg-wedding-cream/85 p-8 md:p-10 flex flex-col">
+              <div className="text-center mb-6">
+                <p className="font-sans text-[10px] tracking-[0.4em] text-wedding-copper uppercase mb-2">Obálka</p>
+                <h3 className="font-serif text-xl md:text-2xl text-wedding-brown font-light">Přineste ji s sebou</h3>
+              </div>
+              <div className="flex justify-center mb-6">
+                <EnvelopeIcon />
+              </div>
+              <p className="font-body text-wedding-brown text-center mt-auto" style={{ fontSize: '1rem' }}>
+                V den svatby bude u vchodu připravený box, do kterého obálku vložíte.
+              </p>
             </div>
 
-            <h3 className="font-serif text-2xl text-wedding-brown font-light mb-2">Bankovní převod</h3>
-            <p className="font-body italic text-wedding-lightbrown/80 mb-8" style={{ fontSize: '0.95rem' }}>
-              Nebo klasická obálka v den svatby — jak je vám libo.
-            </p>
-
-            <div className="space-y-5">
-              <div>
-                <p className="font-sans text-[10px] tracking-[0.4em] text-wedding-copper uppercase mb-1">Číslo účtu</p>
-                <p className="font-serif text-2xl text-wedding-brown tabular-nums">{accountNumber}</p>
+            {/* Bankovní převod */}
+            <div className="border border-wedding-copper/30 bg-wedding-cream/85 p-8 md:p-10 flex flex-col">
+              <div className="text-center mb-6">
+                <p className="font-sans text-[10px] tracking-[0.4em] text-wedding-copper uppercase mb-2">Bankovní převod</p>
+                <h3 className="font-serif text-xl md:text-2xl text-wedding-brown font-light">Bezhotovostně</h3>
               </div>
-              <div>
-                <p className="font-sans text-[10px] tracking-[0.4em] text-wedding-copper uppercase mb-1">IBAN</p>
-                <p className="font-serif text-lg text-wedding-brown tabular-nums">{iban}</p>
-              </div>
-              <div>
-                <p className="font-sans text-[10px] tracking-[0.4em] text-wedding-copper uppercase mb-1">Zpráva pro příjemce</p>
-                <p className="font-serif text-lg text-wedding-brown italic">Svatba Kateřina &amp; Karel</p>
+              <div className="space-y-4 text-center mt-auto">
+                <div>
+                  <p className="font-sans text-[10px] tracking-[0.3em] text-wedding-copper uppercase mb-1">Číslo účtu</p>
+                  <p className="font-serif text-lg md:text-xl text-wedding-brown tabular-nums">{accountNumber}</p>
+                </div>
+                <div>
+                  <p className="font-sans text-[10px] tracking-[0.3em] text-wedding-copper uppercase mb-1">IBAN</p>
+                  <p className="font-serif text-base text-wedding-brown tabular-nums break-all">{iban}</p>
+                </div>
+                <div>
+                  <p className="font-sans text-[10px] tracking-[0.3em] text-wedding-copper uppercase mb-1">Zpráva pro příjemce</p>
+                  <p className="font-serif text-base text-wedding-brown italic">Svatba Kateřina &amp; Karel</p>
+                </div>
               </div>
             </div>
           </div>

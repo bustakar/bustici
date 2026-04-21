@@ -72,11 +72,10 @@ export default function Dotaznik() {
     <section id="dotaznik" className="py-24 md:py-32 canvas-parchment relative">
       <div className="max-w-2xl mx-auto px-6">
         <div ref={headingRef} className="fade-section text-center mb-12">
-          <p className="section-label">Odpovězte do 30. dubna 2026</p>
           <h2 className="section-title font-light">Dotazník</h2>
           <LaceDivider className="mt-4" />
           <p className="font-body text-wedding-lightbrown max-w-md mx-auto mt-5" style={{ fontSize: '1.05rem' }}>
-            Pomozte nám to zorganizovat — pár otázek a hotovo.
+            Potvrďte účast
           </p>
         </div>
 
@@ -94,7 +93,7 @@ export default function Dotaznik() {
                 required
                 value={form.name}
                 onChange={e => setField('name', e.target.value)}
-                placeholder="Marie Nováková"
+                placeholder="Kateřina Buštová"
                 className={inputClass}
               />
             </div>

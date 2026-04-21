@@ -1,6 +1,62 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useFadeIn } from '../hooks/useFadeIn'
 import { ColorSwatch, LaceDivider } from './Ornaments'
+
+type LightboxImage = { src: string; alt: string; caption?: string } | null
+
+function Lightbox({ image, onClose }: { image: LightboxImage; onClose: () => void }) {
+  useEffect(() => {
+    if (!image) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+    document.addEventListener('keydown', onKey)
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = prev
+    }
+  }, [image, onClose])
+
+  if (!image) return null
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Náhled obrázku"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-6 md:p-10 bg-wedding-darkbrown/90 backdrop-blur-sm animate-fade-in"
+      onClick={onClose}
+    >
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label="Zavřít"
+        className="absolute top-5 right-5 md:top-7 md:right-7 text-wedding-cream/90 hover:text-wedding-cream transition-colors"
+      >
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path d="M6 6l12 12M6 18L18 6" strokeLinecap="round" />
+        </svg>
+      </button>
+      <figure
+        className="relative max-w-5xl max-h-full flex flex-col items-center"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <img
+          src={image.src}
+          alt={image.alt}
+          className="max-w-full max-h-[85vh] object-contain shadow-warm-lg"
+        />
+        {image.caption && (
+          <figcaption className="font-body italic text-wedding-cream/90 mt-5 text-center max-w-2xl" style={{ fontSize: '0.95rem' }}>
+            {image.caption}
+          </figcaption>
+        )}
+      </figure>
+    </div>
+  )
+}
 
 const palette = [
   { color: '#FFCBA4', name: 'Peach', hex: '#FFCBA4' },
@@ -14,12 +70,32 @@ const palette = [
   { color: '#F0D67A', name: 'Butter', hex: '#F0D67A' },
 ]
 
-function OutfitImage({ src, alt, label }: { src: string; alt: string; label: string }) {
+function OutfitImage({
+  src,
+  alt,
+  label,
+  onOpen,
+}: {
+  src: string
+  alt: string
+  label: string
+  onOpen: () => void
+}) {
   return (
     <figure className="flex flex-col">
-      <div className="w-full overflow-hidden bg-wedding-cream/60 border border-wedding-copper/20 aspect-[3/4]">
-        <img src={src} alt={alt} className="w-full h-full object-cover" loading="lazy" />
-      </div>
+      <button
+        type="button"
+        onClick={onOpen}
+        aria-label={`Zvětšit obrázek: ${label}`}
+        className="group w-full overflow-hidden bg-wedding-cream/60 border border-wedding-copper/20 aspect-[3/4] cursor-zoom-in"
+      >
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+      </button>
       <figcaption className="font-body italic text-wedding-brown mt-3 text-center" style={{ fontSize: '0.95rem' }}>
         {label}
       </figcaption>
@@ -48,6 +124,8 @@ export default function DressCode() {
   useFadeIn(paletteRef, 200)
   useFadeIn(menRef, 350)
   useFadeIn(womenRef, 450)
+
+  const [lightboxImage, setLightboxImage] = useState<LightboxImage>(null)
 
   return (
     <section id="dress-code" className="py-24 md:py-32 canvas-apricot relative">
@@ -82,18 +160,17 @@ export default function DressCode() {
             <h3 className="font-serif text-2xl md:text-3xl text-wedding-brown font-light">Lněný oblek, garden formal</h3>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
             {menOutfits.map(o => (
-              <OutfitImage key={o.src} src={o.src} alt={o.label} label={o.label} />
+              <OutfitImage
+                key={o.src}
+                src={o.src}
+                alt={o.label}
+                label={o.label}
+                onOpen={() => setLightboxImage({ src: o.src, alt: o.label, caption: o.label })}
+              />
             ))}
           </div>
-
-          <ul className="space-y-2 font-body text-wedding-brown max-w-2xl mx-auto" style={{ fontSize: '1rem' }}>
-            <li>· Lněný nebo lehký vlněný oblek</li>
-            <li>· Bílá nebo světlá košile, kravata či motýlek volitelné</li>
-            <li>· Hnědé nebo světlé kožené boty (žádné tenisky)</li>
-            <li>· Klidně bez sáčka po obřadu — venkovní oslava</li>
-          </ul>
         </div>
 
         {/* Dámy */}
@@ -103,21 +180,21 @@ export default function DressCode() {
             <h3 className="font-serif text-2xl md:text-3xl text-wedding-brown font-light">Romantické šaty, plynoucí střih</h3>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
             {womenOutfits.map(o => (
-              <OutfitImage key={o.src} src={o.src} alt={o.label} label={o.label} />
+              <OutfitImage
+                key={o.src}
+                src={o.src}
+                alt={o.label}
+                label={o.label}
+                onOpen={() => setLightboxImage({ src: o.src, alt: o.label, caption: o.label })}
+              />
             ))}
           </div>
-
-          <ul className="space-y-2 font-body text-wedding-brown max-w-2xl mx-auto" style={{ fontSize: '1rem' }}>
-            <li>· Šaty délky midi nebo maxi, klidně volánové či vrstvené</li>
-            <li>· Lehčí materiály: šifon, len, bavlna, hedvábí</li>
-            <li>· Květinové vzory vítány</li>
-            <li>· Pohodlné boty — část oslavy je na trávě</li>
-            <li>· Pamatujte na lehkou bundu nebo šál pro pozdní večer</li>
-          </ul>
         </div>
       </div>
+
+      <Lightbox image={lightboxImage} onClose={() => setLightboxImage(null)} />
     </section>
   )
 }

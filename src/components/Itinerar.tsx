@@ -42,15 +42,14 @@ export default function Itinerar() {
   useFadeIn(headingRef)
 
   const items: ItemProps[] = [
-    { time: '13:30', title: 'Příjezd hostů', note: 'Welcome drink na zahradě' },
-    { time: '14:00', title: 'Obřad', note: 'Pod hruškou na zahradě statku' },
-    { time: '14:45', title: 'Gratulace & přípitek', note: 'Společné fotky s novomanželi' },
-    { time: '15:30', title: 'Raut & koktejlová hodina', note: 'Lehké občerstvení, hudba a povídání' },
-    { time: '17:00', title: 'Skupinové fotografie' },
-    { time: '18:00', title: 'Slavnostní večeře', note: 'Společná tabule v sále' },
-    { time: '20:00', title: 'První tanec & krájení dortu' },
-    { time: '20:30', title: 'Tanec a zábava', note: 'Živá kapela až do půlnoci, poté DJ' },
-    { time: '02:00', title: 'Konec oficiálního programu', note: 'Pro spící hosty pokračujeme u ohně' },
+    { time: '11:00', title: 'Příjezd hostů' },
+    { time: '12:30', title: 'Obřad' },
+    { time: '13:00', title: 'Přípitek & slavnostní oběd & krájení dortu' },
+    { time: '14:00', title: 'Skupinové fotografie' },
+    { time: '15:00', title: 'První tanec' },
+    { time: '15:30', title: 'Hraní her' },
+    { time: '18:00', title: 'Tanec a zábava s DJ' },
+    { time: '00:00', title: 'Konec oficiálního programu' },
   ]
 
   return (
@@ -61,7 +60,7 @@ export default function Itinerar() {
           <h2 className="section-title font-light">Itinerář</h2>
           <LaceDivider className="mt-4" />
           <p className="font-body text-wedding-lightbrown max-w-md mx-auto mt-4" style={{ fontSize: '1.05rem' }}>
-            Aby vám nic neuteklo — tady je celý průběh sobotního dne.
+            Aby vám nic neuteklo — tady je celý průběh pátečního dne.
           </p>
         </div>
 
