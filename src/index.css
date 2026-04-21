@@ -22,7 +22,7 @@
   }
 }
 
-/* Paper grain overlay — creates warm, textured film grain atmosphere */
+/* Paper grain overlay — warm film texture across whole page */
 body::before {
   content: '';
   position: fixed;
@@ -31,7 +31,7 @@ body::before {
   height: 200%;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.032;
+  opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-size: 180px 180px;
 }
@@ -41,7 +41,10 @@ body::before {
     @apply font-serif text-4xl md:text-5xl text-wedding-brown text-center font-light tracking-wide;
   }
 
-  /* Elegant ornamental divider — lines + diamond */
+  .section-label {
+    @apply font-sans text-xs tracking-[0.4em] text-wedding-copper mb-4 uppercase;
+  }
+
   .ornament {
     @apply flex items-center justify-center gap-4 my-5;
   }
@@ -52,12 +55,6 @@ body::before {
     @apply flex-1 h-px bg-wedding-copper opacity-20;
   }
 
-  /* Section label — uppercase Cinzel style */
-  .section-label {
-    @apply font-sans text-xs tracking-[0.4em] text-wedding-copper mb-4 uppercase;
-  }
-
-  /* Fade-in animation state */
   .fade-section {
     opacity: 0;
     transform: translateY(28px);
@@ -70,90 +67,66 @@ body::before {
     transform: translateY(0);
   }
 
-  /* Card with warm shadow and inset border */
-  .warm-card {
-    @apply bg-white/55 backdrop-blur-sm rounded-2xl border border-wedding-peach/25
-           shadow-warm hover:shadow-warm-lg hover:-translate-y-0.5
-           transition-all duration-300;
-  }
-
-  /* Parchment card — slightly more saturated background */
-  .parchment-card {
-    @apply rounded-2xl border border-wedding-peach/30
-           transition-all duration-300;
-    background: linear-gradient(145deg, rgba(255,248,240,0.7) 0%, rgba(250,240,230,0.5) 100%);
-  }
-
-  /* Button — primary copper */
   .btn-primary {
     @apply font-sans text-xs tracking-[0.25em] uppercase bg-wedding-copper text-wedding-cream
            px-8 py-3 rounded-full hover:bg-wedding-brown
            transition-all duration-300 hover:shadow-copper;
   }
 
-  /* Button — outlined */
   .btn-outline {
     @apply font-sans text-xs tracking-[0.25em] uppercase border border-wedding-copper
            text-wedding-copper px-8 py-3 rounded-full
            hover:bg-wedding-copper hover:text-wedding-cream transition-all duration-300;
   }
-
-  /* Subtle section separator using botanical SVG */
-  .section-sep {
-    @apply text-center text-wedding-copper/30 text-lg select-none my-2;
-  }
 }
 
-/* Elegant parchment texture for specific sections */
-.parchment-bg {
+/* ----- Painted-canvas section backgrounds ----- */
+
+.canvas-parchment {
   background-image:
-    radial-gradient(ellipse at 20% 80%, rgba(251,206,177,0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, rgba(244,194,194,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 80%, rgba(251,206,177,0.15) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 20%, rgba(244,194,194,0.10) 0%, transparent 55%),
     linear-gradient(160deg, #FFF8F0 0%, #FAF0E6 60%, #F5ECD7 100%);
 }
 
-/* Dark romantic section */
-.dark-romantic {
-  background:
-    radial-gradient(ellipse at 30% 50%, rgba(184,115,51,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse at 70% 50%, rgba(232,168,56,0.05) 0%, transparent 60%),
-    #4A3728;
+.canvas-sage {
+  background-image:
+    radial-gradient(ellipse at 30% 30%, rgba(245,236,215,0.45) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 80%, rgba(138,154,91,0.18) 0%, transparent 55%),
+    linear-gradient(170deg, #E8E9DA 0%, #D8DCC4 100%);
+}
+
+.canvas-apricot {
+  background-image:
+    radial-gradient(ellipse at 25% 25%, rgba(255,248,240,0.55) 0%, transparent 60%),
+    radial-gradient(ellipse at 75% 75%, rgba(232,168,56,0.18) 0%, transparent 60%),
+    linear-gradient(160deg, #FBCEB1 0%, #FFCBA4 100%);
+}
+
+.canvas-ivory {
+  background: linear-gradient(170deg, #FAF0E6 0%, #F5ECD7 100%);
+}
+
+/* ----- Lace doily border (used on cards / photo frames) ----- */
+
+.lace-frame {
+  position: relative;
+  padding: 2.5rem;
+}
+
+.lace-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' fill='none' stroke='white' stroke-width='1.2' stroke-opacity='0.85'%3E%3Cpath d='M10 10 Q 14 6 18 10 Q 22 6 26 10 Q 30 6 34 10 Q 38 6 42 10 Q 46 6 50 10 Q 54 6 58 10 Q 62 6 66 10 Q 70 6 74 10 Q 78 6 82 10 Q 86 6 90 10 Q 94 6 98 10 Q 102 6 106 10 Q 110 6 114 10 Q 118 6 122 10 Q 126 6 130 10 Q 134 6 138 10 Q 142 6 146 10 Q 150 6 154 10 Q 158 6 162 10 Q 166 6 170 10 Q 174 6 178 10 Q 182 6 186 10 Q 190 6 190 10' /%3E%3Cpath d='M10 10 Q 6 14 10 18 Q 6 22 10 26 Q 6 30 10 34 Q 6 38 10 42 Q 6 46 10 50 Q 6 54 10 58 Q 6 62 10 66 Q 6 70 10 74 Q 6 78 10 82 Q 6 86 10 90 Q 6 94 10 98 Q 6 102 10 106 Q 6 110 10 114 Q 6 118 10 122 Q 6 126 10 130 Q 6 134 10 138 Q 6 142 10 146 Q 6 150 10 154 Q 6 158 10 162 Q 6 166 10 170 Q 6 174 10 178 Q 6 182 10 186 Q 6 190 10 190' /%3E%3Cpath d='M190 10 Q 194 14 190 18 Q 194 22 190 26 Q 194 30 190 34 Q 194 38 190 42 Q 194 46 190 50 Q 194 54 190 58 Q 194 62 190 66 Q 194 70 190 74 Q 194 78 190 82 Q 194 86 190 90 Q 194 94 190 98 Q 194 102 190 106 Q 194 110 190 114 Q 194 118 190 122 Q 194 126 190 130 Q 194 134 190 138 Q 194 142 190 146 Q 194 150 190 154 Q 194 158 190 162 Q 194 166 190 170 Q 194 174 190 178 Q 194 182 190 186 Q 194 190 190 190' /%3E%3Cpath d='M10 190 Q 14 194 18 190 Q 22 194 26 190 Q 30 194 34 190 Q 38 194 42 190 Q 46 194 50 190 Q 54 194 58 190 Q 62 194 66 190 Q 70 194 74 190 Q 78 194 82 190 Q 86 194 90 190 Q 94 194 98 190 Q 102 194 106 190 Q 110 194 114 190 Q 118 194 122 190 Q 126 194 130 190 Q 134 194 138 190 Q 142 194 146 190 Q 150 194 154 190 Q 158 194 162 190 Q 166 194 170 190 Q 174 194 178 190 Q 182 194 186 190 Q 190 194 190 190' /%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0 1px 2px rgba(74,55,40,0.15));
 }
 
 /* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 5px;
-}
-::-webkit-scrollbar-track {
-  background: #FFF8F0;
-}
-::-webkit-scrollbar-thumb {
-  background: #FFCBA4;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #B87333;
-}
-
-/* Lace border — subtle top border treatment for section headings */
-.lace-border {
-  position: relative;
-}
-
-.lace-border::after {
-  content: '— ✦ —';
-  display: block;
-  text-align: center;
-  color: #B87333;
-  opacity: 0.35;
-  font-family: 'EB Garamond', Georgia, serif;
-  font-style: italic;
-  font-size: 1rem;
-  letter-spacing: 0.5em;
-  margin-top: 1rem;
-}
-
-/* Vignette overlay on hero */
-.hero-vignette {
-  background: radial-gradient(ellipse at center, transparent 40%, rgba(74,55,40,0.08) 100%);
-}
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #FFF8F0; }
+::-webkit-scrollbar-thumb { background: #FFCBA4; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #B87333; }

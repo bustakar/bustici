@@ -1,27 +1,27 @@
-import Header from './components/Header'
 import Hero from './components/Hero'
-import OurStory from './components/OurStory'
-import EventDetails from './components/EventDetails'
-import RSVP from './components/RSVP'
-import Registry from './components/Registry'
-import Accommodations from './components/Accommodations'
+import Map from './components/Map'
+import Itinerar from './components/Itinerar'
+import Menu from './components/Menu'
+import DressCode from './components/DressCode'
 import Gallery from './components/Gallery'
+import Gifts from './components/Gifts'
 import FAQ from './components/FAQ'
+import Dotaznik from './components/Dotaznik'
 import Footer from './components/Footer'
 
 export default function App() {
   return (
     <div className="min-h-screen bg-wedding-cream">
-      <Header />
       <main>
         <Hero />
-        <OurStory />
-        <EventDetails />
-        <RSVP />
-        <Registry />
-        <Accommodations />
+        <Map />
+        <Itinerar />
+        <Menu />
+        <DressCode />
         <Gallery />
+        <Gifts />
         <FAQ />
+        <Dotaznik />
       </main>
       <Footer />
     </div>
