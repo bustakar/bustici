@@ -54,7 +54,7 @@ export default function Ubytovani() {
   const totalBeds = rooms.reduce((sum, r) => sum + r.beds, 0)
 
   return (
-    <section id="ubytovani" className="py-24 md:py-32 canvas-apricot relative">
+    <section id="ubytovani" className="py-24 md:py-32 canvas-parchment relative">
       <div className="max-w-4xl mx-auto px-6">
         <div ref={headingRef} className="fade-section text-center mb-12">
           <p className="section-label">Kde složíte hlavu</p>

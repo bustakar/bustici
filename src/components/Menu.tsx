@@ -71,7 +71,7 @@ export default function Menu() {
   useFadeIn(headingRef)
 
   return (
-    <section id="menu" className="py-24 md:py-32 canvas-sage relative">
+    <section id="menu" className="py-24 md:py-32 canvas-parchment relative">
       <div className="max-w-4xl mx-auto px-6">
         <div ref={headingRef} className="fade-section text-center mb-14">
           <p className="section-label">Co se bude jíst a pít</p>

@@ -128,7 +128,7 @@ export default function DressCode() {
   const [lightboxImage, setLightboxImage] = useState<LightboxImage>(null)
 
   return (
-    <section id="dress-code" className="py-24 md:py-32 canvas-apricot relative">
+    <section id="dress-code" className="py-24 md:py-32 canvas-ivory relative">
       <div className="max-w-5xl mx-auto px-6">
         <div ref={headingRef} className="fade-section text-center mb-12">
           <p className="section-label">Co si vzít na sebe</p>

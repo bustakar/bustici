@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { LaceCorner } from './Ornaments'
 
 function Countdown() {
   const target = new Date('2026-06-12T14:00:00')
@@ -30,17 +29,17 @@ function Countdown() {
   ]
 
   return (
-    <div className="flex items-center justify-center gap-0 mt-10">
+    <div className="flex items-center justify-center gap-0 mt-8">
       {units.map(({ value, label }, i) => (
         <div key={label} className="flex items-center">
-          <div className="text-center px-5 md:px-7">
+          <div className="text-center px-3 md:px-5">
             <div
-              className="font-serif text-4xl md:text-5xl text-wedding-brown font-light tabular-nums leading-none"
+              className="font-serif text-3xl md:text-4xl text-wedding-brown font-light tabular-nums leading-none"
               style={{ letterSpacing: '-0.02em' }}
             >
               {String(value).padStart(2, '0')}
             </div>
-            <div className="font-sans text-[10px] tracking-[0.3em] text-wedding-brown mt-2 uppercase">
+            <div className="font-sans text-[9px] tracking-[0.3em] text-wedding-brown mt-2 uppercase">
               {label}
             </div>
           </div>
@@ -62,100 +61,76 @@ export default function Hero() {
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
     >
-      {/* Painted Monet background — full bleed */}
+      {/* Background image — full bleed, no overlay */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: 'url(/hero-monet.jpg)' }}
       />
 
-      {/* Warm cream wash for legibility */}
-      <div className="absolute inset-0 bg-wedding-cream/65" />
+      {/* Content card */}
+      <div className="relative w-full max-w-[720px] mx-auto px-4">
+        <div className="relative text-center bg-wedding-cream border border-wedding-peach/45 px-8 py-12 md:px-14 md:py-14">
+            <p className="font-sans text-[10px] tracking-[0.45em] text-wedding-brown mb-8 uppercase font-semibold">
+              Slavnostní oznámení sňatku
+            </p>
 
-      {/* Soft vignette */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse at center, transparent 30%, rgba(74,55,40,0.25) 100%)',
-        }}
-      />
+            <h1
+              className="font-serif font-light text-wedding-brown leading-none"
+              style={{ fontSize: 'clamp(3rem, 9vw, 6rem)', letterSpacing: '-0.01em' }}
+            >
+              Kateřina
+            </h1>
 
-      {/* Lace corner ornaments */}
-      <div className="absolute top-0 left-0 pointer-events-none">
-        <LaceCorner size={220} />
-      </div>
-      <div className="absolute top-0 right-0 pointer-events-none">
-        <LaceCorner size={220} flipX />
-      </div>
-      <div className="absolute bottom-0 left-0 pointer-events-none">
-        <LaceCorner size={220} flipY />
-      </div>
-      <div className="absolute bottom-0 right-0 pointer-events-none">
-        <LaceCorner size={220} flipX flipY />
-      </div>
+            <div className="my-3 md:my-4 flex items-center justify-center gap-4">
+              <div className="h-px flex-1 max-w-[60px] bg-wedding-copper/40" />
+              <span
+                className="font-serif italic text-wedding-copper"
+                style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)', lineHeight: 1 }}
+              >
+                &amp;
+              </span>
+              <div className="h-px flex-1 max-w-[60px] bg-wedding-copper/40" />
+            </div>
 
-      {/* Main content */}
-      <div className="relative z-10 text-center px-8 max-w-3xl mx-auto animate-fade-in">
-        <p className="font-sans text-[11px] tracking-[0.45em] text-wedding-brown mb-10 uppercase font-semibold">
-          Slavnostní oznámení sňatku
-        </p>
+            <h1
+              className="font-serif font-light text-wedding-brown leading-none"
+              style={{ fontSize: 'clamp(3rem, 9vw, 6rem)', letterSpacing: '-0.01em' }}
+            >
+              Karel
+            </h1>
 
-        <h1
-          className="font-serif font-light text-wedding-brown leading-none"
-          style={{ fontSize: 'clamp(4.5rem, 12vw, 9rem)', letterSpacing: '-0.01em' }}
-        >
-          Kateřina
-        </h1>
+            <div className="space-y-1.5 mt-8">
+              <p className="font-serif italic text-xl md:text-2xl text-wedding-brown font-light">
+                12. června 2026
+              </p>
+              <p className="font-sans text-[11px] tracking-[0.4em] text-wedding-brown uppercase font-medium">
+                Statek Jedraž
+              </p>
+            </div>
 
-        <div className="my-4 md:my-5 flex items-center justify-center gap-5">
-          <div className="h-px flex-1 max-w-[80px] bg-wedding-copper/40" />
-          <span
-            className="font-serif italic text-wedding-copper"
-            style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', lineHeight: 1 }}
-          >
-            &amp;
-          </span>
-          <div className="h-px flex-1 max-w-[80px] bg-wedding-copper/40" />
-        </div>
+            <Countdown />
 
-        <h1
-          className="font-serif font-light text-wedding-brown leading-none"
-          style={{ fontSize: 'clamp(4.5rem, 12vw, 9rem)', letterSpacing: '-0.01em' }}
-        >
-          Karel
-        </h1>
-
-        <div className="space-y-2 mt-10">
-          <p className="font-serif italic text-2xl md:text-3xl text-wedding-brown font-light">
-            12. června 2026
-          </p>
-          <p className="font-sans text-[12px] tracking-[0.4em] text-wedding-brown uppercase font-medium">
-            Statek Jedraž
-          </p>
-        </div>
-
-        <Countdown />
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
-          <button
-            onClick={() => document.querySelector('#dotaznik')?.scrollIntoView({ behavior: 'smooth' })}
-            className="btn-primary"
-          >
-            Potvrdit účast
-          </button>
-          <button
-            onClick={() => document.querySelector('#mapa')?.scrollIntoView({ behavior: 'smooth' })}
-            className="btn-outline"
-          >
-            Více informací
-          </button>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center mt-10">
+              <button
+                onClick={() => document.querySelector('#dotaznik')?.scrollIntoView({ behavior: 'smooth' })}
+                className="btn-primary"
+              >
+                Potvrdit účast
+              </button>
+              <button
+                onClick={() => document.querySelector('#mapa')?.scrollIntoView({ behavior: 'smooth' })}
+                className="btn-outline"
+              >
+                Více informací
+              </button>
+            </div>
         </div>
       </div>
 
       {/* Scroll indicator */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-        <span className="font-sans text-[10px] tracking-[0.3em] text-wedding-brown uppercase">Dolů</span>
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" className="text-wedding-brown">
+        <span className="font-sans text-[10px] tracking-[0.3em] text-wedding-cream uppercase">Dolů</span>
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" className="text-wedding-cream">
           <path d="M9 3v12M3 9l6 6 6-6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </div>

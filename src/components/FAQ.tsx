@@ -74,7 +74,7 @@ export default function FAQ() {
   useFadeIn(headingRef)
 
   return (
-    <section id="faq" className="py-24 md:py-32 canvas-parchment relative">
+    <section id="faq" className="py-24 md:py-32 canvas-ivory relative">
       <div className="max-w-2xl mx-auto px-6">
         <div ref={headingRef} className="fade-section text-center mb-12">
           <p className="section-label">Máte otázky?</p>
