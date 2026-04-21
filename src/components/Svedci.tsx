@@ -11,7 +11,7 @@ type Witness = {
 const witnesses: Witness[] = [
   {
     role: 'Za nevěstu',
-    name: 'Tereza Koloušková',
+    name: 'Terezka Koloušková',
   },
   {
     role: 'Za ženicha',

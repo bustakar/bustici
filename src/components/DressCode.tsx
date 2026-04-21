@@ -104,15 +104,15 @@ function OutfitImage({
 }
 
 const menOutfits = [
-  { src: '/dress-code/men-1.jpg', label: 'Lněné obleky v zemitých tónech' },
+  { src: '/dress-code/men-1.jpg', label: 'Obleky v zemitých tónech' },
   { src: '/dress-code/men-2.jpg', label: 'Šalvějová zelená, modrá, hnědá / blush' },
-  { src: '/dress-code/men-3.jpg', label: 'Beach garden — světlý len, košile bez kravaty' },
+  { src: '/dress-code/men-3.jpg', label: 'Svěží teplé barvy' },
 ]
 
 const womenOutfits = [
-  { src: '/dress-code/women-1.jpg', label: 'Pastelové vrstvené šaty (sage, dusty modrá, peach, butter)' },
+  { src: '/dress-code/women-1.jpg', label: 'Vrstvené šaty (šalvějová, dusty modrá, meruňková, žlutá)' },
   { src: '/dress-code/women-2.jpg', label: 'Romantické střihy v paletě (květinové vzory vítány)' },
-  { src: '/dress-code/women-3.jpg', label: 'Mismatch styl — nemusíte se domlouvat, jen barvy' },
+  { src: '/dress-code/women-3.jpg', label: 'Teplé jarní barvy' },
 ]
 
 export default function DressCode() {
@@ -157,7 +157,7 @@ export default function DressCode() {
         <div ref={menRef} className="fade-section mb-12 border border-wedding-copper/25 bg-wedding-cream/85 p-8 md:p-10">
           <div className="text-center mb-7">
             <p className="font-sans text-[10px] tracking-[0.4em] text-wedding-copper uppercase mb-2">Páni</p>
-            <h3 className="font-serif text-2xl md:text-3xl text-wedding-brown font-light">Lněný oblek, garden formal</h3>
+            <h3 className="font-serif text-2xl md:text-3xl text-wedding-brown font-light">Garden formal</h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
@@ -177,7 +177,7 @@ export default function DressCode() {
         <div ref={womenRef} className="fade-section border border-wedding-copper/25 bg-wedding-cream/85 p-8 md:p-10">
           <div className="text-center mb-7">
             <p className="font-sans text-[10px] tracking-[0.4em] text-wedding-copper uppercase mb-2">Dámy</p>
-            <h3 className="font-serif text-2xl md:text-3xl text-wedding-brown font-light">Romantické šaty, plynoucí střih</h3>
+            <h3 className="font-serif text-2xl md:text-3xl text-wedding-brown font-light">Romantické šaty, květy a volány</h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
