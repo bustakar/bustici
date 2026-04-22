@@ -104,7 +104,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       body: JSON.stringify({
         from: 'Svatba Bustici <onboarding@resend.dev>',
         to: 'karelbusta@gmail.com',
-        cc: 'katerinafosumova@seznam.cz',
         subject: `Svatba — ${name} ${attending === 'yes' ? '✓ přijde' : '✗ nepřijde'}`,
         html,
       }),
