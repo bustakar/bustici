@@ -27,3 +27,4 @@ dist-ssr
 # Claude Code local-only files
 .claude/settings.local.json
 .claude/worktrees/
+.env*.local

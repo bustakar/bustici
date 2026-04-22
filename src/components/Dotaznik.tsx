@@ -5,7 +5,7 @@ import { LaceDivider } from './Ornaments'
 type FormData = {
   name: string
   attending: 'yes' | 'no' | ''
-  sleepover: 'yes' | 'no' | 'maybe' | ''
+  sleepover: 'yes' | 'no' | ''
   vegan: boolean
   dietary: string
   message: string
@@ -29,17 +29,31 @@ export default function Dotaznik() {
   const [form, setForm] = useState<FormData>(initial)
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const setField = <K extends keyof FormData>(field: K, value: FormData[K]) =>
     setForm(prev => ({ ...prev, [field]: value }))
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    setTimeout(() => {
-      setLoading(false)
+    setError('')
+
+    try {
+      const res = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+
+      if (!res.ok) throw new Error('Odeslání se nezdařilo')
+
       setSubmitted(true)
-    }, 1000)
+    } catch {
+      setError('Něco se pokazilo. Zkuste to prosím znovu.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   const inputClass =
@@ -130,16 +144,12 @@ export default function Dotaznik() {
                 {/* Sleepover */}
                 <div>
                   <label className={labelClass}>Přespíš na statku? *</label>
-                  <div className="grid grid-cols-3 gap-3">
-                    {([
-                      { v: 'yes', label: 'Ano, prosím o pokoj' },
-                      { v: 'maybe', label: 'Možná, řekni mi cenu' },
-                      { v: 'no', label: 'Ne, mám odvoz' },
-                    ] as const).map(opt => (
+                  <div className="grid grid-cols-2 gap-3">
+                    {(['yes', 'no'] as const).map(val => (
                       <label
-                        key={opt.v}
-                        className={`flex items-center justify-center text-center py-3.5 px-3  border cursor-pointer transition-all font-body leading-tight ${
-                          form.sleepover === opt.v
+                        key={val}
+                        className={`flex items-center justify-center py-3.5 px-4 border cursor-pointer transition-all font-body ${
+                          form.sleepover === val
                             ? 'bg-wedding-copper text-wedding-cream border-wedding-copper shadow-copper'
                             : 'bg-white/70 text-wedding-lightbrown border-wedding-peach/45 hover:border-wedding-copper/35'
                         }`}
@@ -147,12 +157,12 @@ export default function Dotaznik() {
                         <input
                           type="radio"
                           name="sleepover"
-                          value={opt.v}
-                          checked={form.sleepover === opt.v}
-                          onChange={() => setField('sleepover', opt.v)}
+                          value={val}
+                          checked={form.sleepover === val}
+                          onChange={() => setField('sleepover', val)}
                           className="sr-only"
                         />
-                        <span style={{ fontSize: '0.95rem' }}>{opt.label}</span>
+                        <span style={{ fontSize: '1rem' }}>{val === 'yes' ? 'Ano, přespím' : 'Ne, mám odvoz'}</span>
                       </label>
                     ))}
                   </div>
@@ -206,6 +216,12 @@ export default function Dotaznik() {
             </div>
 
             <div className="h-px bg-wedding-peach/35" />
+
+            {error && (
+              <p className="font-body text-wedding-terracotta text-center" style={{ fontSize: '0.95rem' }}>
+                {error}
+              </p>
+            )}
 
             <button
               type="submit"
