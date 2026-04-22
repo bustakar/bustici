@@ -81,45 +81,48 @@ body::before {
 }
 
 /* ----- Floral pattern overlay for content sections ----- */
+/* Must be in @layer so Tailwind utilities (like "fixed") can override */
 
-[class*="canvas-"] {
-  position: relative;
-  overflow: hidden;
-}
+@layer components {
+  [class*="canvas-"] {
+    position: relative;
+    overflow: hidden;
+  }
 
-[class*="canvas-"]::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url('/flowers-pattern.jpg');
-  background-size: 500px auto;
-  background-repeat: repeat;
-  opacity: 0.14;
-  pointer-events: none;
-  z-index: 0;
-  -webkit-mask-image: linear-gradient(
-    to right,
-    rgba(0,0,0,1)   0%,
-    rgba(0,0,0,0.4) 12%,
-    rgba(0,0,0,0)   28%,
-    rgba(0,0,0,0)   72%,
-    rgba(0,0,0,0.4) 88%,
-    rgba(0,0,0,1)   100%
-  );
-  mask-image: linear-gradient(
-    to right,
-    rgba(0,0,0,1)   0%,
-    rgba(0,0,0,0.4) 12%,
-    rgba(0,0,0,0)   28%,
-    rgba(0,0,0,0)   72%,
-    rgba(0,0,0,0.4) 88%,
-    rgba(0,0,0,1)   100%
-  );
-}
+  [class*="canvas-"]::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/flowers-pattern.jpg');
+    background-size: 500px auto;
+    background-repeat: repeat;
+    opacity: 0.14;
+    pointer-events: none;
+    z-index: 0;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      rgba(0,0,0,1)   0%,
+      rgba(0,0,0,0.4) 12%,
+      rgba(0,0,0,0)   28%,
+      rgba(0,0,0,0)   72%,
+      rgba(0,0,0,0.4) 88%,
+      rgba(0,0,0,1)   100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      rgba(0,0,0,1)   0%,
+      rgba(0,0,0,0.4) 12%,
+      rgba(0,0,0,0)   28%,
+      rgba(0,0,0,0)   72%,
+      rgba(0,0,0,0.4) 88%,
+      rgba(0,0,0,1)   100%
+    );
+  }
 
-[class*="canvas-"] > * {
-  position: relative;
-  z-index: 1;
+  [class*="canvas-"] > * {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 /* ----- Painted-canvas section backgrounds ----- */

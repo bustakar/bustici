@@ -1,99 +1,204 @@
-import { useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useFadeIn } from '../hooks/useFadeIn'
-import { LaceDoily, LaceDivider } from './Ornaments'
+import { LaceDivider } from './Ornaments'
 
-const placeholders = [
-  { tone: 'peach', label: 'Zásnuby', ratio: 'tall', framed: false },
-  { tone: 'blush', label: 'Praha', ratio: 'wide', framed: false },
-  { tone: 'sage', label: 'Příroda', ratio: 'square', framed: true },
-  { tone: 'apricot', label: 'Večer', ratio: 'square', framed: false },
-  { tone: 'copper', label: 'Portrét', ratio: 'tall', framed: true },
-  { tone: 'bluebell', label: 'Cesty', ratio: 'wide', framed: false },
-  { tone: 'lilac', label: 'Společně', ratio: 'square', framed: false },
-  { tone: 'butter', label: 'Detaily', ratio: 'square', framed: false },
-  { tone: 'terracotta', label: 'Úsměv', ratio: 'wide', framed: true },
-] as const
+type Photo = { src: string; orientation: 'portrait' | 'landscape' }
 
-const toneToBg: Record<string, string> = {
-  peach: 'from-wedding-peach/45 to-wedding-apricot/55',
-  blush: 'from-wedding-blush/45 to-wedding-peach/35',
-  sage: 'from-wedding-sage/45 to-wedding-moss/30',
-  apricot: 'from-wedding-apricot/45 to-wedding-golden/25',
-  copper: 'from-wedding-copper/22 to-wedding-blush/30',
-  bluebell: 'from-wedding-bluebell/40 to-wedding-sage/25',
-  lilac: 'from-wedding-lilac/40 to-wedding-blush/30',
-  butter: 'from-wedding-butter/40 to-wedding-apricot/30',
-  terracotta: 'from-wedding-terracotta/30 to-wedding-peach/35',
-}
+const photos: Photo[] = [
+  { src: '/gallery/IMG_0025.jpg', orientation: 'portrait' },
+  { src: '/gallery/IMG_0550.jpg', orientation: 'landscape' },
+  { src: '/gallery/IMG_0843.jpg', orientation: 'landscape' },
+  { src: '/gallery/IMG_1700.jpg', orientation: 'portrait' },
+  { src: '/gallery/IMG_1883.jpg', orientation: 'landscape' },
+  { src: '/gallery/IMG_2562.jpg', orientation: 'portrait' },
+  { src: '/gallery/IMG_3275.jpg', orientation: 'landscape' },
+  { src: '/gallery/IMG_3726.jpg', orientation: 'landscape' },
+  { src: '/gallery/IMG_4137.jpg', orientation: 'portrait' },
+  { src: '/gallery/IMG_4358.jpg', orientation: 'landscape' },
+  { src: '/gallery/IMG_4753.jpg', orientation: 'landscape' },
+  { src: '/gallery/IMG_5158.jpg', orientation: 'landscape' },
+  { src: '/gallery/IMG_5247.jpg', orientation: 'landscape' },
+  { src: '/gallery/IMG_6622.jpg', orientation: 'landscape' },
+  { src: '/gallery/IMG_7235.jpg', orientation: 'landscape' },
+  { src: '/gallery/IMG_8075.jpg', orientation: 'landscape' },
+  { src: '/gallery/IMG_8608.jpg', orientation: 'portrait' },
+  { src: '/gallery/IMG_9154.jpg', orientation: 'landscape' },
+]
 
-const CameraIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" className="text-wedding-brown/35">
-    <path d="M 3 10 C 3 8.9 3.9 8 5 8 L 9 8 L 11 5 L 21 5 L 23 8 L 27 8 C 28.1 8 29 8.9 29 10 L 29 24 C 29 25.1 28.1 26 27 26 L 5 26 C 3.9 26 3 25.1 3 24 Z"
-      stroke="currentColor" strokeWidth="1.2" fill="none" />
-    <circle cx="16" cy="17" r="5" stroke="currentColor" strokeWidth="1.2" fill="none" />
-    <circle cx="24" cy="12" r="1.5" fill="currentColor" fillOpacity="0.4" />
-  </svg>
-)
+/* ─── Lightbox with prev / next ─── */
 
-function PhotoCard({ item, index }: { item: typeof placeholders[number]; index: number }) {
-  const ref = useRef<HTMLDivElement>(null)
-  useFadeIn(ref, index * 70)
+function Lightbox({
+  index,
+  onClose,
+  onPrev,
+  onNext,
+}: {
+  index: number | null
+  onClose: () => void
+  onPrev: () => void
+  onNext: () => void
+}) {
+  const onKey = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+      if (e.key === 'ArrowLeft') onPrev()
+      if (e.key === 'ArrowRight') onNext()
+    },
+    [onClose, onPrev, onNext],
+  )
 
-  const heightClass =
-    item.ratio === 'tall' ? 'h-80' : item.ratio === 'wide' ? 'h-48' : 'h-60'
+  useEffect(() => {
+    if (index === null) return
+    document.addEventListener('keydown', onKey)
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = prev
+    }
+  }, [index, onKey])
+
+  if (index === null) return null
+
+  const photo = photos[index]
 
   return (
     <div
-      ref={ref}
-      className={`fade-section relative overflow-hidden bg-gradient-to-br ${toneToBg[item.tone]} group ${heightClass} border border-wedding-brown/10`}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Náhled fotografie"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-wedding-darkbrown/90 backdrop-blur-sm"
+      onClick={onClose}
     >
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 transition-opacity duration-300 group-hover:opacity-0">
-        <CameraIcon />
-        <span className="font-sans text-[10px] tracking-[0.35em] text-wedding-brown/40 uppercase">{item.label}</span>
-      </div>
+      {/* Close */}
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label="Zavřít"
+        className="absolute top-5 right-5 md:top-7 md:right-7 text-wedding-cream/90 hover:text-wedding-cream transition-colors z-10"
+      >
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path d="M6 6l12 12M6 18L18 6" strokeLinecap="round" />
+        </svg>
+      </button>
 
-      {/* Lace doily overlay on framed cards */}
-      {item.framed && (
-        <div className="absolute inset-0 flex items-center justify-center opacity-90 pointer-events-none">
-          <LaceDoily width={Math.min(320, 240)} height={item.ratio === 'tall' ? 260 : 180} />
-        </div>
-      )}
+      {/* Prev */}
+      <button
+        type="button"
+        onClick={(e) => { e.stopPropagation(); onPrev() }}
+        aria-label="Předchozí fotka"
+        className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 w-11 h-11 md:w-12 md:h-12 rounded-full bg-wedding-cream/15 hover:bg-wedding-cream/30 flex items-center justify-center text-wedding-cream transition-colors z-10"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path d="M15 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
 
-      <div className="absolute inset-0 bg-wedding-brown/0 group-hover:bg-wedding-brown/10 transition-all duration-300" />
+      {/* Next */}
+      <button
+        type="button"
+        onClick={(e) => { e.stopPropagation(); onNext() }}
+        aria-label="Další fotka"
+        className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 w-11 h-11 md:w-12 md:h-12 rounded-full bg-wedding-cream/15 hover:bg-wedding-cream/30 flex items-center justify-center text-wedding-cream transition-colors z-10"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
 
-      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <div className="bg-wedding-cream/90 px-4 py-1.5">
-          <span className="font-sans text-[10px] tracking-[0.3em] text-wedding-copper uppercase">Brzy</span>
-        </div>
-      </div>
+      {/* Image */}
+      <figure
+        className="relative max-w-5xl max-h-full flex flex-col items-center px-14 md:px-20"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <img
+          src={photo.src}
+          alt={`Fotka ${index + 1} z ${photos.length}`}
+          className="max-w-full max-h-[85vh] object-contain shadow-warm-lg"
+        />
+        <figcaption className="font-body text-wedding-cream/70 mt-4 text-center" style={{ fontSize: '0.9rem' }}>
+          {index + 1} / {photos.length}
+        </figcaption>
+      </figure>
     </div>
   )
 }
+
+/* ─── Photo card ─── */
+
+function PhotoCard({ photo, index, onOpen }: { photo: Photo; index: number; onOpen: () => void }) {
+  const ref = useRef<HTMLDivElement>(null)
+  useFadeIn(ref, index * 50)
+
+  return (
+    <div ref={ref} className="fade-section break-inside-avoid">
+      <button
+        type="button"
+        onClick={onOpen}
+        aria-label={`Otevřít fotku ${index + 1}`}
+        className="group w-full overflow-hidden border border-wedding-brown/10 cursor-zoom-in block"
+      >
+        <img
+          src={photo.src}
+          alt={`Fotka ${index + 1}`}
+          loading="lazy"
+          className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+      </button>
+    </div>
+  )
+}
+
+/* ─── Gallery section ─── */
 
 export default function Gallery() {
   const headingRef = useRef<HTMLDivElement>(null)
   useFadeIn(headingRef)
 
-  return (
-    <section id="galerie" className="py-24 md:py-32 canvas-parchment relative">
-      <div className="max-w-6xl mx-auto px-6">
-        <div ref={headingRef} className="fade-section text-center mb-14">
-          <p className="section-label">Vzpomínky</p>
-          <h2 className="section-title font-light">Galerie</h2>
-          <LaceDivider className="mt-4" />
-          <p className="font-body text-wedding-lightbrown max-w-md mx-auto mt-4" style={{ fontSize: '1.05rem' }}>
-            Naše společné chvíle — dobrodružství, místa, večery, cesty.
-          </p>
-        </div>
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
-        <div className="columns-2 md:columns-3 gap-4 space-y-4">
-          {placeholders.map((item, i) => (
-            <div key={i} className="break-inside-avoid">
-              <PhotoCard item={item} index={i} />
-            </div>
-          ))}
+  const closeLightbox = useCallback(() => setLightboxIndex(null), [])
+
+  const goPrev = useCallback(() => {
+    setLightboxIndex((i) => (i === null ? null : (i - 1 + photos.length) % photos.length))
+  }, [])
+
+  const goNext = useCallback(() => {
+    setLightboxIndex((i) => (i === null ? null : (i + 1) % photos.length))
+  }, [])
+
+  return (
+    <>
+      <section id="galerie" className="py-24 md:py-32 canvas-parchment relative">
+        <div className="max-w-6xl mx-auto px-6">
+          <div ref={headingRef} className="fade-section text-center mb-14">
+            <p className="section-label">Vzpomínky</p>
+            <h2 className="section-title font-light">Galerie</h2>
+            <LaceDivider className="mt-4" />
+            <p className="font-body text-wedding-lightbrown max-w-md mx-auto mt-4" style={{ fontSize: '1.05rem' }}>
+              Naše společné chvíle — dobrodružství, místa, večery, cesty.
+            </p>
+          </div>
+
+          <div className="columns-2 md:columns-3 gap-4 space-y-4">
+            {photos.map((photo, i) => (
+              <PhotoCard
+                key={photo.src}
+                photo={photo}
+                index={i}
+                onOpen={() => setLightboxIndex(i)}
+              />
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <Lightbox
+        index={lightboxIndex}
+        onClose={closeLightbox}
+        onPrev={goPrev}
+        onNext={goNext}
+      />
+    </>
   )
 }
