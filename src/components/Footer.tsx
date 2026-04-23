@@ -13,10 +13,10 @@ export default function Footer() {
       <div className="relative z-10 max-w-xl mx-auto px-6 py-20 text-center">
         {/* Monogram */}
         <div
-          className="font-serif font-light text-wedding-cream mb-4 leading-none"
-          style={{ fontSize: 'clamp(3rem, 8vw, 5rem)', letterSpacing: '-0.01em' }}
+          className="text-wedding-cream mb-4 leading-none"
+          style={{ fontSize: 'clamp(3rem, 8vw, 5rem)', fontFamily: '"Pinyon Script", "Cormorant Garamond", serif' }}
         >
-          K <span className="text-wedding-golden italic">&amp;</span> K
+          K <span className="text-wedding-golden">&amp;</span> K
         </div>
 
         <p className="font-sans text-[10px] tracking-[0.45em] text-wedding-peach/85 mb-1.5 uppercase">
@@ -31,12 +31,6 @@ export default function Footer() {
           <span className="text-wedding-golden/40 text-base">✦</span>
           <div className="flex-1 h-px bg-wedding-copper/20" />
         </div>
-
-        <p className="font-body text-wedding-cream/75 mb-1.5" style={{ fontSize: '0.9rem' }}>
-          <a href="mailto:wedding@bustici.cz" className="hover:text-wedding-golden transition-colors">
-            wedding@bustici.cz
-          </a>
-        </p>
 
         <p className="font-sans text-[9px] tracking-[0.2em] text-wedding-cream/50 mt-8 uppercase">
           © 2026 Kateřina &amp; Karel

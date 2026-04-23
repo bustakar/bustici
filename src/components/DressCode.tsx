@@ -59,15 +59,13 @@ function Lightbox({ image, onClose }: { image: LightboxImage; onClose: () => voi
 }
 
 const palette = [
-  { color: '#FFCBA4', name: 'Peach', hex: '#FFCBA4' },
-  { color: '#E8A838', name: 'Golden', hex: '#E8A838' },
-  { color: '#C46A4F', name: 'Terracotta', hex: '#C46A4F' },
-  { color: '#FBCEB1', name: 'Apricot', hex: '#FBCEB1' },
-  { color: '#F4C2C2', name: 'Blush', hex: '#F4C2C2' },
-  { color: '#A1A8BE', name: 'Bluebell', hex: '#A1A8BE' },
-  { color: '#D9B8D4', name: 'Lilac', hex: '#D9B8D4' },
-  { color: '#B5BFA1', name: 'Sage', hex: '#B5BFA1' },
-  { color: '#F0D67A', name: 'Butter', hex: '#F0D67A' },
+  { color: '#F8C8A8', name: 'Peach', hex: '#F8C8A8' },
+  { color: '#E8A040', name: 'Golden hour', hex: '#E8A040' },
+  { color: '#C46050', name: 'Copper', hex: '#C46050' },
+  { color: '#F0A880', name: 'Apricot', hex: '#F0A880' },
+  { color: '#F0A0B0', name: 'Blush', hex: '#F0A0B0' },
+  { color: '#A8BCD0', name: 'Misty blue', hex: '#A8BCD0' },
+  { color: '#8A9050', name: 'Moss', hex: '#8A9050' },
 ]
 
 function OutfitImage({

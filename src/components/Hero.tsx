@@ -71,12 +71,12 @@ export default function Hero() {
       <div className="relative w-full max-w-[720px] mx-auto px-4">
         <div className="relative text-center bg-wedding-cream border border-wedding-peach/45 px-8 py-12 md:px-14 md:py-14">
             <p className="font-sans text-[10px] tracking-[0.45em] text-wedding-brown mb-8 uppercase font-semibold">
-              Slavnostní oznámení sňatku
+              S radostní Vás zveme na náš svatební den
             </p>
 
             <h1
-              className="font-serif font-light text-wedding-brown leading-none"
-              style={{ fontSize: 'clamp(3rem, 9vw, 6rem)', letterSpacing: '-0.01em' }}
+              className="text-wedding-brown leading-none"
+              style={{ fontSize: 'clamp(4.4rem, 10vw, 7.2rem)', fontFamily: '"Pinyon Script", "Cormorant Garamond", serif' }}
             >
               Kateřina
             </h1>
@@ -84,8 +84,8 @@ export default function Hero() {
             <div className="my-3 md:my-4 flex items-center justify-center gap-4">
               <div className="h-px flex-1 max-w-[60px] bg-wedding-copper/40" />
               <span
-                className="font-serif italic text-wedding-copper"
-                style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)', lineHeight: 1 }}
+                className="text-wedding-copper"
+                style={{ fontSize: 'clamp(2.6rem, 5vw, 3.8rem)', lineHeight: 1, fontFamily: '"Pinyon Script", "Cormorant Garamond", serif' }}
               >
                 &amp;
               </span>
@@ -93,8 +93,8 @@ export default function Hero() {
             </div>
 
             <h1
-              className="font-serif font-light text-wedding-brown leading-none"
-              style={{ fontSize: 'clamp(3rem, 9vw, 6rem)', letterSpacing: '-0.01em' }}
+              className="text-wedding-brown leading-none"
+              style={{ fontSize: 'clamp(4.4rem, 10vw, 7.2rem)', fontFamily: '"Pinyon Script", "Cormorant Garamond", serif' }}
             >
               Karel
             </h1>

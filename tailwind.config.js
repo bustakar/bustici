@@ -36,6 +36,7 @@ export default {
         serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
         body: ['"EB Garamond"', 'Georgia', 'serif'],
         sans: ['"Cinzel"', 'Georgia', 'serif'],
+        script: ['"Pinyon Script"', '"Cormorant Garamond"', 'serif'],
       },
       fontSize: {
         '10xl': ['10rem', { lineHeight: '1' }],

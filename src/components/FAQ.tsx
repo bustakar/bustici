@@ -21,7 +21,7 @@ const faqs = [
   },
   {
     q: 'Co když mám alergii nebo jsem vegan?',
-    a: 'Veganská varianta je k dispozici u všech chodů a alergie zvládneme. Stačí to napsat v dotazníku níže — necháme to vědět catering.',
+    a: 'Veganská varianta je k dispozici u všech chodů a alergie zvládneme. Stačí to napsat v dotazníku níže.',
   },
 ]
 
@@ -89,15 +89,6 @@ export default function FAQ() {
           {faqs.map((faq, i) => (
             <FAQItem key={i} q={faq.q} a={faq.a} index={i} />
           ))}
-        </div>
-
-        <div className="text-center mt-10">
-          <p className="font-body text-wedding-lightbrown mb-4" style={{ fontSize: '1rem' }}>
-            Nenašli jste odpověď?
-          </p>
-          <a href="mailto:wedding@bustici.cz" className="btn-outline inline-flex">
-            Napište nám
-          </a>
         </div>
       </div>
     </section>
