@@ -112,7 +112,15 @@ export default function Hero() {
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center mt-10">
               <button
-                onClick={() => document.querySelector('#dotaznik')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => {
+                  document.querySelectorAll('.fade-section:not(.visible)').forEach(el => {
+                    const h = el as HTMLElement
+                    h.style.transition = 'none'
+                    el.classList.add('visible')
+                    requestAnimationFrame(() => { h.style.transition = '' })
+                  })
+                  document.querySelector('#dotaznik')?.scrollIntoView({ behavior: 'smooth' })
+                }}
                 className="btn-primary"
               >
                 Potvrdit účast
