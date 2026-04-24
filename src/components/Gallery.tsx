@@ -142,7 +142,8 @@ function PhotoCard({ photo, index, onOpen }: { photo: Photo; index: number; onOp
           src={photo.src}
           alt={`Fotka ${index + 1}`}
           loading="lazy"
-          className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          style={{ aspectRatio: photo.orientation === 'portrait' ? '3/4' : '4/3' }}
         />
       </button>
     </div>
